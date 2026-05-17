@@ -92,8 +92,27 @@ void main() {
         if (students.isEmpty) {
           print('\nNo students enrolled yet.');
         } else {
+          print('\n--- View Sorting Options ---');
+          print('1. Ascending by Name');
+          print('2. Descending by Name');
+          print('3. Default (As added)');
+          stdout.write('Select an option (1-3): ');
+          String? sortChoice = stdin.readLineSync()?.trim();
+
+          List<Map<String, dynamic>> displayList = List.from(students);
+
+          if (sortChoice == '1') {
+            displayList.sort(
+              (a, b) => a['name'].toString().compareTo(b['name'].toString()),
+            );
+          } else if (sortChoice == '2') {
+            displayList.sort(
+              (a, b) => b['name'].toString().compareTo(a['name'].toString()),
+            );
+          }
+
           print('\n--- Enrolled Students ---');
-          for (var student in students) {
+          for (var student in displayList) {
             print(
               'Name: ${student['name']}, ID: ${student['id']}, Department: ${student['department']}',
             );
